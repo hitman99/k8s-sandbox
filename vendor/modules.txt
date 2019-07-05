@@ -1,0 +1,40 @@
+# github.com/dimfeld/httppath v0.0.0-20170720192232-ee938bf73598
+github.com/dimfeld/httppath
+# github.com/dimfeld/httptreemux v5.0.1+incompatible
+github.com/dimfeld/httptreemux
+# github.com/golang-migrate/migrate/v4 v4.4.0
+github.com/golang-migrate/migrate/v4
+github.com/golang-migrate/migrate/v4/database/postgres
+github.com/golang-migrate/migrate/v4/source/file
+github.com/golang-migrate/migrate/v4/database
+github.com/golang-migrate/migrate/v4/source
+# github.com/gorilla/websocket v1.4.0
+github.com/gorilla/websocket
+# github.com/hashicorp/errwrap v1.0.0
+github.com/hashicorp/errwrap
+# github.com/hashicorp/go-multierror v1.0.0
+github.com/hashicorp/go-multierror
+# github.com/inconshreveable/mousetrap v1.0.0
+github.com/inconshreveable/mousetrap
+# github.com/lib/pq v1.1.1
+github.com/lib/pq
+github.com/lib/pq/oid
+github.com/lib/pq/scram
+# github.com/manveru/faker v0.0.0-20171103152722-9fbc68a78c4d
+github.com/manveru/faker
+# github.com/sergi/go-diff v1.0.0
+github.com/sergi/go-diff/diffmatchpatch
+# github.com/spf13/cobra v0.0.5
+github.com/spf13/cobra
+# github.com/spf13/pflag v1.0.3
+github.com/spf13/pflag
+# github.com/zach-klippenstein/goregen v0.0.0-20160303162051-795b5e3961ea
+github.com/zach-klippenstein/goregen
+# goa.design/goa/v3 v3.0.2
+goa.design/goa/v3/http
+goa.design/goa/v3/http/middleware
+goa.design/goa/v3/middleware
+goa.design/goa/v3/dsl
+goa.design/goa/v3/pkg
+goa.design/goa/v3/eval
+goa.design/goa/v3/expr
