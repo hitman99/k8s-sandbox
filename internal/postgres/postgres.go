@@ -58,7 +58,8 @@ func (c *pg) InsertHash(text, hash string) error {
 		if err, ok := err.(*net.OpError); ok {
 			if err, ok := err.Err.(*os.SyscallError); ok {
 				if err, ok := err.Err.(syscall.Errno); ok {
-					if err == syscall.Errno(10051) || err == syscall.Errno(syscall.WSAECONNABORTED) {
+					// connection error
+					if err == syscall.Errno(10061) {
 						c.reconnect()
 					}
 				}
