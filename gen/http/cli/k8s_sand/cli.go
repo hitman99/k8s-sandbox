@@ -30,7 +30,7 @@ func UsageCommands() string {
 // UsageExamples produces an example of a valid invocation of the CLI tool.
 func UsageExamples() string {
 	return os.Args[0] + ` pgload load --body '{
-      "count": 1873507761458882011
+      "count": 8606277519841735856
    }'` + "\n" +
 		""
 }
@@ -149,7 +149,7 @@ Load implements load.
 
 Example:
     `+os.Args[0]+` pgload load --body '{
-      "count": 1873507761458882011
+      "count": 8606277519841735856
    }'
 `, os.Args[0])
 }

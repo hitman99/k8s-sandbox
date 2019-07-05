@@ -22,9 +22,11 @@ type JSONStatus struct {
 // JSONStatusView is a type that runs validations on a projected type.
 type JSONStatusView struct {
 	// result code
-	Code *int
+	Code *uint
 	// status info
 	Status *string
+	// processing time
+	Time *string
 }
 
 var (
@@ -34,6 +36,7 @@ var (
 		"default": []string{
 			"code",
 			"status",
+			"time",
 		},
 	}
 )

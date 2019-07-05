@@ -41,6 +41,7 @@ var JsonStatus = ResultType("application/json", func() {
 	Attributes(func() {
 		Attribute("code", UInt, "result code")
 		Attribute("status", String, "status info")
+		Attribute("time", String, "processing time")
 		Required("code", "status")
 	})
 })

@@ -22,7 +22,7 @@ func BuildLoadPayload(pgloadLoadBody string) (*pgload.LoadPayload, error) {
 	{
 		err = json.Unmarshal([]byte(pgloadLoadBody), &body)
 		if err != nil {
-			return nil, fmt.Errorf("invalid JSON for body, example of valid JSON:\n%s", "'{\n      \"count\": 1873507761458882011\n   }'")
+			return nil, fmt.Errorf("invalid JSON for body, example of valid JSON:\n%s", "'{\n      \"count\": 8606277519841735856\n   }'")
 		}
 	}
 	v := &pgload.LoadPayload{

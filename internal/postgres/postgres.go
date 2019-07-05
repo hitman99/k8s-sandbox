@@ -29,7 +29,7 @@ type pg struct {
 func mustPrepare(db *sql.DB, query string, logger *log.Logger) (stmt *sql.Stmt) {
 	stmt, err := db.Prepare(query)
 	if err != nil {
-		log.Fatalf("cannot prepare statment %s. %s", query, err.Error())
+		logger.Fatalf("cannot prepare statment %s. %s", query, err.Error())
 	}
 	return
 }

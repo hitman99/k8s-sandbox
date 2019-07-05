@@ -2,10 +2,12 @@ package services
 
 import (
 	"context"
+	"encoding/hex"
 	"github.com/hitman99/k8s-sandbox/gen/pgload"
 	"github.com/hitman99/k8s-sandbox/internal/postgres"
 	"github.com/hitman99/k8s-sandbox/internal/utils"
 	"log"
+	"time"
 )
 
 // pgload service example implementation.
@@ -31,13 +33,21 @@ func NewPgload(logger *log.Logger) pgload.Service {
 // Load implements load.
 func (s *pgloadsrvc) Load(ctx context.Context, p *pgload.LoadPayload) (*pgload.JSONStatus, error) {
 	s.logger.Printf("Loading postgres with %d records", p.Count)
+	start := time.Now()
 	for i := 0; i < p.Count; i++ {
 		text := utils.GetRandomString(10)
 		hash := utils.GetSha256(text)
-		s.db.InsertHash(text, string(hash))
+		hashHex := make([]byte, hex.EncodedLen(len(hash)))
+		hex.Encode(hashHex, hash)
+		err := s.db.InsertHash(text, string(hashHex))
+		if err != nil {
+			return nil, err
+		}
 	}
+	diff := time.Now().Sub(start).String()
 	return &pgload.JSONStatus{
 		Code:   0,
 		Status: "OK",
+		Time:   &diff,
 	}, nil
 }

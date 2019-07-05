@@ -23,9 +23,11 @@ type LoadRequestBody struct {
 // response body.
 type LoadResponseBody struct {
 	// result code
-	Code *int `form:"code,omitempty" json:"code,omitempty" xml:"code,omitempty"`
+	Code *uint `form:"code,omitempty" json:"code,omitempty" xml:"code,omitempty"`
 	// status info
 	Status *string `form:"status,omitempty" json:"status,omitempty" xml:"status,omitempty"`
+	// processing time
+	Time *string `form:"time,omitempty" json:"time,omitempty" xml:"time,omitempty"`
 }
 
 // NewLoadRequestBody builds the HTTP request body from the payload of the
@@ -43,6 +45,7 @@ func NewLoadJSONStatusOK(body *LoadResponseBody) *pgloadviews.JSONStatusView {
 	v := &pgloadviews.JSONStatusView{
 		Code:   body.Code,
 		Status: body.Status,
+		Time:   body.Time,
 	}
 	return v
 }

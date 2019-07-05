@@ -24,9 +24,11 @@ type LoadRequestBody struct {
 // response body.
 type LoadResponseBody struct {
 	// result code
-	Code int `form:"code" json:"code" xml:"code"`
+	Code uint `form:"code" json:"code" xml:"code"`
 	// status info
 	Status string `form:"status" json:"status" xml:"status"`
+	// processing time
+	Time *string `form:"time,omitempty" json:"time,omitempty" xml:"time,omitempty"`
 }
 
 // NewLoadResponseBody builds the HTTP response body from the result of the
@@ -35,6 +37,7 @@ func NewLoadResponseBody(res *pgloadviews.JSONStatusView) *LoadResponseBody {
 	body := &LoadResponseBody{
 		Code:   *res.Code,
 		Status: *res.Status,
+		Time:   res.Time,
 	}
 	return body
 }

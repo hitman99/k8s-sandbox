@@ -38,9 +38,11 @@ type LoadPayload struct {
 // JSONStatus is the result type of the pgload service load method.
 type JSONStatus struct {
 	// result code
-	Code int
+	Code uint
 	// status info
 	Status string
+	// processing time
+	Time *string
 }
 
 // NewJSONStatus initializes result type JSONStatus from viewed result type
@@ -68,7 +70,9 @@ func NewViewedJSONStatus(res *JSONStatus, view string) *pgloadviews.JSONStatus {
 
 // newJSONStatus converts projected type JSONStatus to service type JSONStatus.
 func newJSONStatus(vres *pgloadviews.JSONStatusView) *JSONStatus {
-	res := &JSONStatus{}
+	res := &JSONStatus{
+		Time: vres.Time,
+	}
 	if vres.Code != nil {
 		res.Code = *vres.Code
 	}
@@ -84,6 +88,7 @@ func newJSONStatusView(res *JSONStatus) *pgloadviews.JSONStatusView {
 	vres := &pgloadviews.JSONStatusView{
 		Code:   &res.Code,
 		Status: &res.Status,
+		Time:   res.Time,
 	}
 	return vres
 }

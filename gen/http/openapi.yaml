@@ -52,10 +52,10 @@ definitions:
       count:
         type: integer
         description: How many records to generate in the table
-        example: 8603081991435869249
+        example: 5903464339086558009
         format: int64
     example:
-      count: 326365449501293430
+      count: 2470622916578317694
     required:
     - count
   PgloadLoadResponseBody:
@@ -65,16 +65,21 @@ definitions:
       code:
         type: integer
         description: result code
-        example: 6385578980826583310
+        example: 2901144883637179425
         format: int64
       status:
         type: string
         description: status info
-        example: Velit beatae nam autem.
+        example: Unde quis.
+      time:
+        type: string
+        description: processing time
+        example: Qui magnam.
     description: LoadResponseBody result type (default view)
     example:
-      code: 5213264074844113834
-      status: Voluptate ipsum quia et.
+      code: 232099947010398291
+      status: Inventore quia dolores.
+      time: Dolore non alias necessitatibus.
     required:
     - code
     - status
