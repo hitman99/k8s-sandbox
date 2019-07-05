@@ -3,8 +3,10 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
 	"log"
+	"net"
+	"os"
+	"syscall"
 )
 
 type PG interface {
@@ -14,6 +16,8 @@ type PG interface {
 type stmts struct {
 	insertHash *sql.Stmt
 }
+
+const insertHash = `INSERT INTO hashes(text, hash) VALUES($1, $2)`
 
 type pg struct {
 	db       *sql.DB
@@ -43,13 +47,24 @@ func NewPG(host, user, password, database, uri_args string, logger *log.Logger) 
 		pass: password,
 		args: uri_args,
 		stmts: &stmts{
-			insertHash: mustPrepare(db, `INSERT INTO hashes(text, hash) VALUES($1, $2)`, logger),
+			insertHash: mustPrepare(db, insertHash, logger),
 		},
 	}
 }
 
 func (c *pg) InsertHash(text, hash string) error {
 	_, err := c.stmts.insertHash.Exec(text, hash)
+	if err != nil {
+		if err, ok := err.(*net.OpError); ok {
+			if err, ok := err.Err.(*os.SyscallError); ok {
+				if err, ok := err.Err.(syscall.Errno); ok {
+					if err == syscall.Errno(10051) || err == syscall.Errno(syscall.WSAECONNABORTED) {
+						c.reconnect()
+					}
+				}
+			}
+		}
+	}
 	return err
 }
 
@@ -64,4 +79,13 @@ func MustGetConnection(user, password, host, database, uri_args string, logger *
 	}
 	logger.Print("connected to postgres server")
 	return db
+}
+
+func (c *pg) reconnect() {
+	db := MustGetConnection(c.user, c.pass, c.host, c.database, c.args, c.logger)
+	c.stmts = &stmts{
+		insertHash: mustPrepare(db, insertHash, c.logger),
+	}
+	c.db.Close()
+	c.db = db
 }
